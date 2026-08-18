@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flobelle Adimou | Portfolio - Ingénierie Financière & Trading Quantitatif</title>
+  <style>
+    :root {
+      --bg-main: #0a0f1d;
+      --bg-card: #111827;
+      --bg-card-hover: #1f293d;
+      --text-primary: #f9fafb;
+      --text-secondary: #94a3b8;
+      --accent: #10b981; /* Vert typé marché/trading */
+      --accent-dim: rgba(16, 185, 129, 0.12);
+      --accent-cyan: #38bdf8;
+      --border-color: #1e293b;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(10, 15, 29, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+
+    nav a.logo {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+
+    nav a.logo span {
+      color: var(--accent);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    nav ul a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover {
+      color: var(--accent);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    section {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      margin-bottom: 1rem;
+    }
+
+    .hero {
+      min-height: 75vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      line-height: 1.15;
+      font-weight: 800;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero h2.subtitle {
+      font-size: 1.35rem;
+      color: var(--accent-cyan);
+      font-weight: 500;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 780px;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #052e16;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card);
+      border-color: var(--text-secondary);
+    }
+
+    h2.section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    h2.section-title::after {
+      content: "";
+      flex-grow: 1;
+      height: 1px;
+      background: var(--border-color);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .card h4 {
+      font-size: 0.95rem;
+      color: var(--accent-cyan);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .card .date-loc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+    }
+
+    .card ul {
+      list-style-position: inside;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .card ul li {
+      margin-bottom: 0.4rem;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .contact-item strong {
+      color: var(--text-primary);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    input, textarea {
+      padding: 0.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-family: inherit;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+      nav ul {
+        display: none; /* Simplification responsive */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <a href="#accueil" class="logo">FLOBELLE ADIMOU<span>.</span></a>
+      <ul>
+        <li><a href="#profil">Profil</a></li>
+        <li><a href="#competences">Expertise</a></li>
+        <li><a href="#experiences">Expérience</a></li>
+        <li><a href="#formation">Formation</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero / Accueil -->
+    <section id="accueil" class="hero">
+      <div class="badge">Certification AMF &bull; Disponible pour stage de fin d'études</div>
+      <h1>Ingénierie Financière & <span>Trading Quantitatif</span></h1>
+      <h2 class="subtitle">Candidature : Assistant Trader – Trading Bots, Gamma Flip & Automatisation</h2>
+      <p>
+        Étudiante en Master 2 spécialisée en modélisation quantitative et dynamique des marchés de dérivés. Conception de bots de trading, modélisation de l'exposition Gamma et automatisation de tâches sur desk de marché.
+      </p>
+      <div class="cta-group">
+        <a href="#contact" class="btn">Prendre contact</a>
+        <a href="#competences" class="btn btn-secondary">Explorer les compétences</a>
+      </div>
+    </section>
+
+    <!-- Profil & Approche -->
+    <section id="profil">
+      <h2 class="section-title">Synthèse du Profil</h2>
+      <div class="card" style="line-height: 1.8;">
+        <p style="color: var(--text-secondary);">
+          Spécialisée en <strong>ingénierie financière, mathématiques financières et modélisation quantitative</strong>, je combine une compréhension approfondie de la dynamique des marchés de dérivés (Grecques, Gamma Flip, volatilité, repositionnement des market makers) avec une maîtrise solide des outils quantitatifs et de développement (Python, Pandas, NumPy, VBA, SQL).
+        </p>
+        <div style="margin-top: 1rem; color: var(--accent-cyan); font-weight: 500;">
+          &bull; Forte capacité à convertir des concepts quantitatifs complexes (Gamma exposure, hedging) en outils d'analyse opérationnels et automatisés pour le desk.
+        </div>
+      </div>
+    </section>
+
+    <!-- Compétences & Expertise -->
+    <section id="competences">
+      <h2 class="section-title">Expertise Technique & Marchés</h2>
+      <div class="grid-3">
+        
+        <div class="card">
+          <h3>Marchés Dérivés</h3>
+          <h4>Dynamique & Pricing</h4>
+          <ul>
+            <li>Dérivés actions et indices</li>
+            <li>Grecques (Gamma, Delta, Vega)</li>
+            <li>Mécanismes du Gamma Flip</li>
+            <li>Carnet d'ordres & microstructure</li>
+            <li>Gestion du P&L & Delta Hedging</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Programmation & Automation</h3>
+          <h4>Outils Quantitatifs</h4>
+          <ul>
+            <li>Python (Pandas, NumPy, SciPy)</li>
+            <li>Matplotlib & APIs de flux</li>
+            <li>Bots & scripts de trading</li>
+            <li>Excel VBA & Automatisation</li>
+            <li>SQL & Power BI</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Aide à la Décision</h3>
+          <h4>Desk & Analytics</h4>
+          <ul>
+            <li>Matrices de calcul quantitatif</li>
+            <li>Modèles de backtesting</li>
+            <li>Automatisation de tâches quotidiennes</li>
+            <li>Nettoyage et traitement de flux volumineux</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Expériences Professionnelles & Réalisations -->
+    <section id="experiences">
+      <h2 class="section-title">Expérience & Réalisations</h2>
+      <div class="grid-2">
+        
+        <div class="card">
+          <span class="badge">1er Prix</span>
+          <h3>ABC BOURSE - Concours Trading Quantitatif (IAE)</h3>
+          <h4>Analyste Quantitatif Trader Simulation</h4>
+          <p class="date-loc">Déc. 2024 – Mars 2025 | Clermont-Ferrand</p>
+          <ul>
+            <li>Élaboration et exécution de stratégies de simulation quantitative.</li>
+            <li>Analyse des microstructures de marché et gestion active des risques.</li>
+          </ul>
+          <div class="tag-container">
+            <span class="tag">Analyse Quantitative</span>
+            <span class="tag">Trading Simulation</span>
+            <span class="tag">Risk Management</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="badge" style="background: rgba(56, 189, 248, 0.1); color: var(--accent-cyan); border-color: rgba(56, 189, 248, 0.3);">Stage</span>
+          <h3>Service des Impôts (MEF)</h3>
+          <h4>Stagiaire Analyste Financier - Process Automation & Data</h4>
+          <p class="date-loc">Juin 2022 – Sept. 2023 | Cotonou, Bénin</p>
+          <ul>
+            <li>Traitement et nettoyage de flux volumineux de données via scripts Python et requêtes SQL.</li>
+            <li>Automatisation de processus métier sous Excel VBA avec réduction mesurable des temps de traitement.</li>
+          </ul>
+          <div class="tag-container">
+            <span class="tag">Python</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Excel VBA</span>
+            <span class="tag">Automation</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Formation Académique -->
+    <section id="formation">
+      <h2 class="section-title">Formation Académique</h2>
+      <div class="grid-2">
+
+        <div class="card">
+          <h3>Master 2 Mathématiques Financières</h3>
+          <h4>ISEG</h4>
+          <p class="date-loc">Sept. 2026 | Lisbonne, Portugal</p>
+        </div>
+
+        <div class="card">
+          <h3>Master 1 Ingénierie Financière de Marché</h3>
+          <h4>Université de Lorraine</h4>
+          <p class="date-loc">Depuis Sept. 2025 | Nancy, France</p>
+          <ul>
+            <li>Évaluation et pricing d'options, Grecques (Gamma, Delta Hedging)</li>
+            <li>Algorithmes de trading sous Python</li>
+            <li>Économétrie des séries temporelles & Gestion des risques</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Licence Économie-Gestion</h3>
+          <h4>Université Clermont Auvergne</h4>
+          <p class="date-loc">2023 – 2025</p>
+        </div>
+
+        <div class="card">
+          <h3>Licence Administration des Finances</h3>
+          <h4>École Nationale d'Administration</h4>
+          <p class="date-loc">2019 – 2022</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-wrapper">
+        
+        <div class="contact-info">
+          <p style="color: var(--text-secondary);">
+            Disponible pour un stage d'Assistant Trader / Desk Quantitative Solutions.
+          </p>
+          <div class="contact-item">
+            <strong>Localisation :</strong> Paris, France
+          </div>
+          <div class="contact-item">
+            <strong>Téléphone :</strong> 06 44 77 16 24
+          </div>
+          <div class="contact-item">
+            <strong>E-mail :</strong> adimougiomeide@gmail.com
+          </div>
+          <div class="contact-item">
+            <strong>Langues :</strong> Français (Natif), Anglais (Courant)
+          </div>
+          <div class="contact-item">
+            <strong>Accréditation :</strong> Certification AMF
+          </div>
+        </div>
+
+        <form onsubmit="event.preventDefault(); alert('Message transmis.');">
+          <div class="form-group">
+            <label for="name">Nom / Société</label>
+            <input type="text" id="name" required placeholder="Ex: Desk Dérivés - Banque XYZ">
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail professionnel</label>
+            <input type="email" id="email" required placeholder="contact@etablissement.com">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" rows="4" required placeholder="Détails de l'opportunité de stage..."></textarea>
+          </div>
+          <button type="submit" class="btn" style="border: none; cursor: pointer; justify-content: center;">Envoyer</button>
+        </form>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Flobelle Adimou &bull; Portfolio Professionnel - Ingénierie Financière & Marchés Dérivés</p>
+  </footer>
+
+</body>
+</html>
