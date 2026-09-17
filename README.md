@@ -1,56 +1,66 @@
-# Portfolio V1
+# Trading Quantitatif & Ingénierie Financière — Portfolio
 
-Personal portfolio of **Flobelle Adimou**, focused on financial engineering, quantitative finance and trading automation.
+Portfolio professionnel de **Flobelle Adimou**, étudiante en mathématiques financières et ingénierie financière, à la recherche d'un **stage en trading**.
 
-## About
+## 🎯 Positionnement
 
-This portfolio presents my academic background, technical skills, market-related expertise and professional experience.
+Profil orienté **Trading Quantitatif, Trading Algorithmique, Marchés Dérivés et Risk Management**.
 
-The project is designed as a lightweight, responsive single-page website.
+Centres d'intérêt :
 
-## Technical stack
+- Trading algorithmique et systématique
+- Analyse quantitative des marchés
+- Dérivés actions et indices
+- Greeks, Gamma Exposure et Gamma Flip
+- Backtesting et analyse de performance
+- Gestion des risques et suivi du P&L
+- Automatisation et développement d'outils pour desk
 
-- HTML5
-- CSS3
-- Responsive design
-- Vanilla JavaScript / front-end tooling as the project evolves
+## 🧰 Stack technique
 
-## Areas of interest
+- **Python** — Pandas, NumPy, SciPy, Matplotlib
+- **SQL** — traitement et analyse de données
+- **VBA / Excel** — automatisation
+- **HTML / CSS / JavaScript** — portfolio et interfaces légères
 
-- Quantitative finance
-- Derivatives and market microstructure
-- Trading strategies and risk management
-- Python-based financial analysis
-- Data processing and automation
-- Trading bots and quantitative tools
+## 📊 Expérience & formation
 
-## Run locally
+- Concours Trading Quantitatif **ABC BOURSE — 1er Prix**
+- Master 2 Mathématiques Financières — ISEG
+- Master 1 Ingénierie Financière de Marché — Université de Lorraine
+- Expérience en analyse financière, data processing et process automation
+- Certification AMF
 
-Clone the repository:
+## 🚀 Projets quantitatifs à venir
 
-```bash
-git clone https://github.com/Giomeide2003/portoflioV1.git
-cd portoflioV1
-```
+- [ ] Trading Bot Python
+- [ ] Moteur de backtesting
+- [ ] Analyse Gamma Exposure / Gamma Flip
+- [ ] Stratégie Mean Reversion
+- [ ] Dashboard de suivi P&L et risque
+- [ ] Analyse de volatilité et séries temporelles
 
-Open `index.html` in a browser, or serve the directory with any local static HTTP server.
+## 🌐 Portfolio
 
-## Project structure
+Le site présente mon parcours, mes compétences quantitatives, mes expériences et mes projets liés aux marchés financiers.
+
+## 📁 Structure
 
 ```text
 portoflioV1/
-└── index.html
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   └── script.js
+├── README.md
+└── .gitignore
 ```
 
-## Roadmap
+## 💼 Objectif professionnel
 
-- [x] Build the first portfolio version
-- [x] Add responsive layout
-- [x] Document the project
-- [ ] Add dedicated project case studies
-- [ ] Add live project demonstrations
-- [ ] Improve accessibility and performance
+**Recherche d'un stage en trading**, notamment en trading algorithmique, dérivés, quantitative solutions ou analyse quantitative de marché.
 
-## Author
+## Auteur
 
-**Flobelle Adimou** — GitHub: [@Giomeide2003](https://github.com/Giomeide2003)
+**Flobelle Adimou** — [@Giomeide2003](https://github.com/Giomeide2003)
