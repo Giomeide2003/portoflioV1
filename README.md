@@ -1,66 +1,65 @@
-# Trading Quantitatif & Ingénierie Financière — Portfolio
+# Trading Quantitatif et Ingénierie Financière
 
-Portfolio professionnel de **Flobelle Adimou**, étudiante en mathématiques financières et ingénierie financière, à la recherche d'un **stage en trading**.
+Portfolio professionnel de Flobelle Adimou, étudiante en mathématiques financières et ingénierie financière, à la recherche d'un stage en trading.
 
-## 🎯 Positionnement
+## Positionnement
 
-Profil orienté **Trading Quantitatif, Trading Algorithmique, Marchés Dérivés et Risk Management**.
+Profil orienté trading quantitatif, trading algorithmique, marchés dérivés et gestion des risques.
 
-Centres d'intérêt :
+Centres d'intérêt
 
-- Trading algorithmique et systématique
-- Analyse quantitative des marchés
-- Dérivés actions et indices
-- Greeks, Gamma Exposure et Gamma Flip
-- Backtesting et analyse de performance
-- Gestion des risques et suivi du P&L
-- Automatisation et développement d'outils pour desk
+Trading algorithmique et systématique  
+Analyse quantitative des marchés  
+Dérivés actions et indices  
+Greeks, Gamma Exposure et Gamma Flip  
+Backtesting et analyse de performance  
+Gestion des risques et suivi du P&L  
+Automatisation et développement d'outils pour desk
 
-## 🧰 Stack technique
+## Compétences techniques
 
-- **Python** — Pandas, NumPy, SciPy, Matplotlib
-- **SQL** — traitement et analyse de données
-- **VBA / Excel** — automatisation
-- **HTML / CSS / JavaScript** — portfolio et interfaces légères
+Python : Pandas, NumPy, SciPy, Matplotlib  
+SQL : traitement et analyse de données  
+VBA et Excel : automatisation  
+HTML, CSS et JavaScript : portfolio et interfaces légères
 
-## 📊 Expérience & formation
+## Expérience et formation
 
-- Concours Trading Quantitatif **ABC BOURSE — 1er Prix**
-- Master 2 Mathématiques Financières — ISEG
-- Master 1 Ingénierie Financière de Marché — Université de Lorraine
-- Expérience en analyse financière, data processing et process automation
-- Certification AMF
+Concours Trading Quantitatif ABC BOURSE : 1er Prix  
+Master 2 Mathématiques Financières : ISEG  
+Master 1 Ingénierie Financière de Marché : Université de Lorraine  
+Expérience en analyse financière, traitement de données et automatisation des processus  
+Certification AMF
 
-## 🚀 Projets quantitatifs à venir
+## Projets quantitatifs
 
-- [ ] Trading Bot Python
-- [ ] Moteur de backtesting
-- [ ] Analyse Gamma Exposure / Gamma Flip
-- [ ] Stratégie Mean Reversion
-- [ ] Dashboard de suivi P&L et risque
-- [ ] Analyse de volatilité et séries temporelles
+Trading Bot Python  
+Moteur de backtesting  
+Analyse Gamma Exposure et Gamma Flip  
+Stratégie Mean Reversion  
+Dashboard de suivi P&L et risque  
+Analyse de volatilité et séries temporelles
 
-## 🌐 Portfolio
+## Portfolio
 
-Le site présente mon parcours, mes compétences quantitatives, mes expériences et mes projets liés aux marchés financiers.
+Le site présente mon parcours, mes compétences, mes expériences et mes projets liés aux marchés financiers.
 
-## 📁 Structure
+## Structure
 
 ```text
 portoflioV1/
-├── index.html
-├── css/
-│   └── style.css
-├── js/
-│   └── script.js
-├── README.md
-└── .gitignore
+index.html
+css/style.css
+js/script.js
+README.md
+.gitignore
 ```
 
-## 💼 Objectif professionnel
+## Objectif professionnel
 
-**Recherche d'un stage en trading**, notamment en trading algorithmique, dérivés, quantitative solutions ou analyse quantitative de marché.
+Recherche d'un stage en trading, notamment en trading algorithmique, dérivés, quantitative solutions ou analyse quantitative de marché.
 
 ## Auteur
 
-**Flobelle Adimou** — [@Giomeide2003](https://github.com/Giomeide2003)
+Flobelle Adimou  
+GitHub : @Giomeide2003
