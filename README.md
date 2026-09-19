@@ -31,13 +31,19 @@ Master 1 Ingénierie Financière de Marché : Université de Lorraine
 Expérience en analyse financière, traitement de données et automatisation des processus  
 Certification AMF
 
-## Projets quantitatifs
+## Projets
 
-Trading Bot Python  
-Moteur de backtesting  
-Analyse Gamma Exposure et Gamma Flip  
-Stratégie Mean Reversion  
-Dashboard de suivi P&L et risque  
+Trading Bot et Backtesting
+
+Premier projet quantitatif : moteur de backtesting en Python avec génération de signaux, simulation des positions, coûts de transaction et métriques de risque.
+
+Voir le projet : `projects/trading-bot-backtest`
+
+Prochains projets
+
+Analyse Gamma Exposure et Gamma Flip
+Stratégie Mean Reversion
+Dashboard de suivi P&L et risque
 Analyse de volatilité et séries temporelles
 
 ## Portfolio
