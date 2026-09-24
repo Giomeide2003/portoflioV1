@@ -31,20 +31,33 @@ Master 1 Ingénierie Financière de Marché : Université de Lorraine
 Expérience en analyse financière, traitement de données et automatisation des processus  
 Certification AMF
 
-## Projets
+## Projets quantitatifs
 
-Trading Bot et Backtesting
+### 1. Trading Bot et Backtesting
 
-Premier projet quantitatif : moteur de backtesting en Python avec génération de signaux, simulation des positions, coûts de transaction et métriques de risque.
+Moteur de backtesting Python avec stratégie de moyennes mobiles, coûts de transaction, prévention du look-ahead bias et métriques de performance.
 
-Voir le projet : `projects/trading-bot-backtest`
+`projects/trading-bot-backtest`
 
-Prochains projets
+### 2. Gamma Exposure et Gamma Flip
 
-Analyse Gamma Exposure et Gamma Flip
-Stratégie Mean Reversion
-Dashboard de suivi P&L et risque
-Analyse de volatilité et séries temporelles
+Calcul de la gamma Black-Scholes, agrégation de l'exposition par chaîne d'options et recherche d'un niveau de Gamma Flip sur données synthétiques.
+
+`projects/gamma-exposure`
+
+### 3. Volatilité Implicite et Greeks
+
+Pricing Black-Scholes, calcul de Delta, Gamma, Vega et Theta, ainsi qu'inversion numérique pour retrouver la volatilité implicite.
+
+`projects/volatility-greeks`
+
+### 4. P&L et Risk
+
+Moteur de suivi de P&L, VaR historique, VaR paramétrique et stress tests sur portefeuille multi-actifs.
+
+`projects/risk-pnl-dashboard`
+
+Les projets utilisent des données synthétiques lorsqu'aucune donnée de marché externe n'est nécessaire. Les hypothèses et limites sont documentées dans chaque projet.
 
 ## Portfolio
 
