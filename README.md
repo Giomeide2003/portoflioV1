@@ -1,18 +1,19 @@
 # Trading Quantitatif et Ingénierie Financière
 
-Portfolio professionnel de Flobelle Adimou, étudiante en mathématiques financières et ingénierie financière, à la recherche d'un stage en trading.
+Portfolio professionnel de Flobelle Adimou, étudiante en mathématiques financières et ingénierie financière, à la recherche d'un stage en trading ou structuration.
 
 ## Positionnement
 
-Profil orienté trading quantitatif, trading algorithmique, marchés dérivés et gestion des risques.
+Profil orienté marchés financiers, dérivés, analyse quantitative, trading systématique et gestion des risques.
 
 Centres d'intérêt
 
 Trading algorithmique et systématique  
 Analyse quantitative des marchés  
 Dérivés actions et indices  
-Greeks, Gamma Exposure et Gamma Flip  
+Greeks et volatilité implicite  
 Backtesting et analyse de performance  
+Facteurs quantitatifs et signaux thématiques  
 Gestion des risques et suivi du P&L  
 Automatisation et développement d'outils pour desk
 
@@ -33,31 +34,25 @@ Certification AMF
 
 ## Projets quantitatifs
 
-### 1. Trading Bot et Backtesting
+### 1. Option Pricing — Black-Scholes
 
-Moteur de backtesting Python avec stratégie de moyennes mobiles, coûts de transaction, prévention du look-ahead bias et métriques de performance.
+Pricer d'options européennes avec calcul du prix Call/Put, Greeks (Delta, Gamma, Vega, Theta) et résolution numérique de la volatilité implicite par Newton-Raphson.
 
-`projects/trading-bot-backtest`
+`projects/option-pricing`
 
-### 2. Gamma Exposure et Gamma Flip
+### 2. Trading Strategy Backtest
 
-Calcul de la gamma Black-Scholes, agrégation de l'exposition par chaîne d'options et recherche d'un niveau de Gamma Flip sur données synthétiques.
+Moteur Python de backtesting d'une stratégie long-only basée sur un croisement de moyennes mobiles, avec calcul des rendements et prévention du look-ahead bias.
 
-`projects/gamma-exposure`
+`projects/trading-backtest`
 
-### 3. Volatilité Implicite et Greeks
+### 3. Thematic Signals Engine
 
-Pricing Black-Scholes, calcul de Delta, Gamma, Vega et Theta, ainsi qu'inversion numérique pour retrouver la volatilité implicite.
+Pipeline de recherche quantitative pour la préparation de données de marché, la construction de signaux multi-facteurs (momentum, exposition sectorielle et valorisation relative), le backtesting vectorisé et l'analyse de performance.
 
-`projects/volatility-greeks`
+`projects/thematic-signals-engine`
 
-### 4. P&L et Risk
-
-Moteur de suivi de P&L, VaR historique, VaR paramétrique et stress tests sur portefeuille multi-actifs.
-
-`projects/risk-pnl-dashboard`
-
-Les projets utilisent des données synthétiques lorsqu'aucune donnée de marché externe n'est nécessaire. Les hypothèses et limites sont documentées dans chaque projet.
+Les projets sont développés progressivement. Les données synthétiques sont utilisées pour les tests reproductibles lorsqu'aucune source de marché externe n'est nécessaire ; les hypothèses et limites sont documentées dans chaque projet.
 
 ## Portfolio
 
@@ -67,16 +62,17 @@ Le site présente mon parcours, mes compétences, mes expériences et mes projet
 
 ```text
 portoflioV1/
-index.html
-css/style.css
-js/script.js
-README.md
-.gitignore
+├── index.html
+├── css/style.css
+├── js/script.js
+├── projects/
+├── README.md
+└── .gitignore
 ```
 
 ## Objectif professionnel
 
-Recherche d'un stage en trading, notamment en trading algorithmique, dérivés, quantitative solutions ou analyse quantitative de marché.
+Recherche d'un stage en trading, structuration, dérivés, quantitative solutions ou analyse quantitative de marché.
 
 ## Auteur
 
