@@ -3,6 +3,7 @@ import pytest
 
 from src.signals.thematic_signals import (
     combine_factor_signals,
+    multi_horizon_momentum,
     cross_sectional_zscore,
     momentum_signal,
     relative_valuation_signal,
@@ -68,3 +69,39 @@ def test_composite_signal_requires_matching_weights():
 
     with pytest.raises(ValueError):
         combine_factor_signals(data, ["momentum"], weights=[0.5, 0.5])
+
+
+def test_multi_horizon_momentum_uses_each_window():
+    dates = pd.date_range("2025-01-01", periods=4, freq="D")
+    data = pd.DataFrame(
+        {
+            "date": list(dates) * 2,
+            "ticker": ["AAA"] * 4 + ["BBB"] * 4,
+            "close": [100.0, 110.0, 121.0, 133.1, 100.0, 105.0, 110.25, 115.7625],
+        }
+    )
+
+    result = multi_horizon_momentum(
+        data,
+        short_window=1,
+        medium_window=2,
+        long_window=3,
+        weights=[1.0, 2.0, 1.0],
+    )
+
+    assert result.loc[result["ticker"] == "AAA", "momentum_1d"].iloc[-1] == pytest.approx(0.10)
+    assert result.loc[result["ticker"] == "AAA", "momentum_2d"].iloc[-1] == pytest.approx(0.21)
+    assert result.loc[result["ticker"] == "AAA", "momentum_3d"].iloc[-1] == pytest.approx(0.331)
+    assert result.loc[result["ticker"] == "AAA", "multi_horizon_momentum"].iloc[-1] == pytest.approx(
+        (0.10 + 2 * 0.21 + 0.331) / 4
+    )
+
+
+def test_multi_horizon_momentum_rejects_invalid_windows():
+    data = sample_prices()
+
+    with pytest.raises(ValueError):
+        multi_horizon_momentum(data, short_window=0)
+
+    with pytest.raises(ValueError):
+        multi_horizon_momentum(data, short_window=5, medium_window=5, long_window=10)
