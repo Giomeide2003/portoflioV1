@@ -18,6 +18,40 @@ def momentum_signal(
     return result
 
 
+def multi_horizon_momentum(
+    prices: pd.DataFrame,
+    short_window: int = 20,
+    medium_window: int = 60,
+    long_window: int = 120,
+    weights: list[float] | None = None,
+) -> pd.DataFrame:
+    """Build a weighted momentum signal across multiple lookback horizons."""
+    windows = [short_window, medium_window, long_window]
+    if any(window <= 0 for window in windows):
+        raise ValueError("lookback windows must be positive")
+    if len(set(windows)) != len(windows):
+        raise ValueError("lookback windows must be distinct")
+
+    if weights is None:
+        weights = [1.0, 1.0, 1.0]
+    if len(weights) != 3:
+        raise ValueError("three weights are required")
+
+    result = prices.copy()
+    for window in windows:
+        result[f"momentum_{window}d"] = (
+            result.groupby("ticker")["close"].pct_change(periods=window)
+        )
+
+    available = [result[f"momentum_{window}d"] for window in windows]
+    result["multi_horizon_momentum"] = sum(
+        weight * signal
+        for weight, signal in zip(weights, available)
+    ) / sum(weights)
+
+    return result
+
+
 def cross_sectional_zscore(
     data: pd.DataFrame,
     column: str,
