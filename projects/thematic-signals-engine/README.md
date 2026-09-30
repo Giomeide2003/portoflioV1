@@ -66,7 +66,9 @@ Les métriques prévues sont :
 
 ## Données
 
-Aucune donnée propriétaire n'est incluse dans le dépôt. Les premiers tests utilisent de petits jeux de données synthétiques afin de rendre le code reproductible.
+Aucune donnée propriétaire n'est incluse dans le dépôt. Les tests utilisent de petits jeux de données synthétiques afin de rendre le code reproductible.
+
+Le module `src/data/market_data.py` fournit maintenant une première brique d'ingestion depuis un fichier CSV. Il valide le schéma minimal (`date`, `ticker`, `close`), normalise les tickers, convertit les dates et rejette les observations dupliquées ou incohérentes.
 
 Une source de données de marché réelle pourra être connectée ultérieurement.
 
