@@ -4,6 +4,8 @@ import pytest
 from src.signals.thematic_signals import (
     combine_factor_signals,
     multi_horizon_momentum,
+    rank_cross_sectional_signal,
+    select_long_positions,
     cross_sectional_zscore,
     momentum_signal,
     relative_valuation_signal,
@@ -105,3 +107,38 @@ def test_multi_horizon_momentum_rejects_invalid_windows():
 
     with pytest.raises(ValueError):
         multi_horizon_momentum(data, short_window=5, medium_window=5, long_window=10)
+
+
+
+def test_cross_sectional_rank_is_computed_by_date():
+    data = pd.DataFrame(
+        {
+            "date": [pd.Timestamp("2025-01-01")] * 3,
+            "ticker": ["AAA", "BBB", "CCC"],
+            "signal": [0.1, 0.3, 0.2],
+        }
+    )
+
+    result = rank_cross_sectional_signal(data, "signal")
+
+    assert result["signal_rank"].tolist() == pytest.approx([1 / 3, 1.0, 2 / 3])
+
+
+def test_select_long_positions_keeps_top_n():
+    data = pd.DataFrame(
+        {
+            "date": [pd.Timestamp("2025-01-01")] * 4,
+            "ticker": ["AAA", "BBB", "CCC", "DDD"],
+            "signal": [0.1, 0.4, 0.2, 0.3],
+        }
+    )
+
+    result = select_long_positions(data, "signal", n_positions=2)
+
+    selected = result.loc[result["selected"], "ticker"].tolist()
+    assert selected == ["BBB", "DDD"]
+
+
+def test_select_long_positions_rejects_invalid_number():
+    with pytest.raises(ValueError):
+        select_long_positions(sample_prices(), "close", n_positions=0)
