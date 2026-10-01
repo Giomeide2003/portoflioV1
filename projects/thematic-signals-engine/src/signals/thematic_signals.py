@@ -116,3 +116,40 @@ def combine_factor_signals(
         for weight, factor in zip(weights, standardized)
     )
     return result
+
+
+
+def rank_cross_sectional_signal(
+    data: pd.DataFrame,
+    signal_column: str,
+) -> pd.DataFrame:
+    """Rank a signal cross-sectionally from lowest to highest on each date."""
+    if signal_column not in data.columns:
+        raise ValueError(f"column not found: {signal_column}")
+
+    result = data.copy()
+    result["signal_rank"] = result.groupby("date")[signal_column].rank(
+        method="average",
+        pct=True,
+    )
+    return result
+
+
+def select_long_positions(
+    data: pd.DataFrame,
+    signal_column: str,
+    n_positions: int,
+) -> pd.DataFrame:
+    """Select the top n securities by signal on each date."""
+    if signal_column not in data.columns:
+        raise ValueError(f"column not found: {signal_column}")
+    if n_positions <= 0:
+        raise ValueError("n_positions must be positive")
+
+    result = rank_cross_sectional_signal(data, signal_column)
+    result["selected"] = (
+        result.groupby("date")[signal_column]
+        .rank(method="first", ascending=False)
+        <= n_positions
+    )
+    return result
