@@ -3,6 +3,8 @@ import pytest
 
 from src.backtest.engine import (
     annualized_volatility,
+    backtest_selected_portfolio,
+    equal_weight_portfolio_returns,
     cumulative_return,
     maximum_drawdown,
     sharpe_ratio,
@@ -49,3 +51,43 @@ def test_signal_persistence():
     signal = pd.Series([1.0, 1.0, -1.0, -1.0])
 
     assert signal_persistence(signal) == pytest.approx(2 / 3)
+
+
+def test_equal_weight_portfolio_uses_lagged_selection():
+    data = pd.DataFrame(
+        {
+            "date": pd.to_datetime(
+                ["2025-01-01", "2025-01-02", "2025-01-01", "2025-01-02"]
+            ),
+            "ticker": ["AAA", "AAA", "BBB", "BBB"],
+            "close": [100.0, 110.0, 100.0, 90.0],
+            "selected": [False, True, True, False],
+        }
+    )
+
+    result = equal_weight_portfolio_returns(data)
+
+    assert result.loc[pd.Timestamp("2025-01-02")] == pytest.approx(0.0)
+
+
+def test_backtest_selected_portfolio_returns_metrics():
+    data = pd.DataFrame(
+        {
+            "date": pd.to_datetime(
+                ["2025-01-01", "2025-01-02", "2025-01-03"] * 2
+            ),
+            "ticker": ["AAA"] * 3 + ["BBB"] * 3,
+            "close": [100.0, 110.0, 121.0, 100.0, 100.0, 100.0],
+            "selected": [True, True, True, False, False, False],
+        }
+    )
+
+    metrics = backtest_selected_portfolio(data)
+
+    assert set(metrics) == {
+        "cumulative_return",
+        "annualized_volatility",
+        "sharpe_ratio",
+        "maximum_drawdown",
+    }
+    assert metrics["cumulative_return"] == pytest.approx(0.21)
