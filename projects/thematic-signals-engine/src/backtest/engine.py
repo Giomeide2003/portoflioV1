@@ -122,3 +122,44 @@ def backtest_selected_portfolio(
         "sharpe_ratio": sharpe_ratio(portfolio_returns),
         "maximum_drawdown": maximum_drawdown(portfolio_returns),
     }
+
+
+
+def benchmark_returns(
+    data: pd.DataFrame,
+    price_column: str = "close",
+) -> pd.Series:
+    """Compute equal-weight benchmark returns across the available universe."""
+    if price_column not in data.columns:
+        raise ValueError(f"column not found: {price_column}")
+
+    result = data.copy()
+    result["asset_return"] = result.groupby("ticker")[price_column].pct_change()
+    return result.groupby("date")["asset_return"].mean().sort_index()
+
+
+def compare_to_benchmark(
+    portfolio_returns: pd.Series,
+    benchmark: pd.Series,
+) -> dict[str, float]:
+    """Compare portfolio performance with an equal-weight benchmark."""
+    aligned = pd.concat(
+        [portfolio_returns.rename("portfolio"), benchmark.rename("benchmark")],
+        axis=1,
+    ).dropna()
+
+    if aligned.empty:
+        return {
+            "portfolio_return": 0.0,
+            "benchmark_return": 0.0,
+            "excess_return": 0.0,
+        }
+
+    portfolio_return = cumulative_return(aligned["portfolio"])
+    benchmark_return = cumulative_return(aligned["benchmark"])
+
+    return {
+        "portfolio_return": portfolio_return,
+        "benchmark_return": benchmark_return,
+        "excess_return": portfolio_return - benchmark_return,
+    }
