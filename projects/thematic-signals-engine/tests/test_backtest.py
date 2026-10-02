@@ -4,6 +4,8 @@ import pytest
 from src.backtest.engine import (
     annualized_volatility,
     backtest_selected_portfolio,
+    benchmark_returns,
+    compare_to_benchmark,
     equal_weight_portfolio_returns,
     cumulative_return,
     maximum_drawdown,
@@ -91,3 +93,36 @@ def test_backtest_selected_portfolio_returns_metrics():
         "maximum_drawdown",
     }
     assert metrics["cumulative_return"] == pytest.approx(0.21)
+
+
+def test_benchmark_returns_are_equal_weighted():
+    data = pd.DataFrame(
+        {
+            "date": pd.to_datetime(
+                ["2025-01-01", "2025-01-02"] * 2
+            ),
+            "ticker": ["AAA", "AAA", "BBB", "BBB"],
+            "close": [100.0, 110.0, 100.0, 90.0],
+        }
+    )
+
+    result = benchmark_returns(data)
+
+    assert result.loc[pd.Timestamp("2025-01-02")] == pytest.approx(0.0)
+
+
+def test_compare_to_benchmark_returns_excess_performance():
+    portfolio = pd.Series(
+        [0.10, 0.10],
+        index=pd.to_datetime(["2025-01-02", "2025-01-03"]),
+    )
+    benchmark = pd.Series(
+        [0.05, 0.05],
+        index=pd.to_datetime(["2025-01-02", "2025-01-03"]),
+    )
+
+    result = compare_to_benchmark(portfolio, benchmark)
+
+    assert result["portfolio_return"] == pytest.approx(0.21)
+    assert result["benchmark_return"] == pytest.approx(0.1025)
+    assert result["excess_return"] == pytest.approx(0.1175)
