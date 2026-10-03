@@ -108,6 +108,9 @@ def test_multi_horizon_momentum_rejects_invalid_windows():
     with pytest.raises(ValueError):
         multi_horizon_momentum(data, short_window=5, medium_window=5, long_window=10)
 
+    with pytest.raises(ValueError):
+        multi_horizon_momentum(data, short_window=1, medium_window=2, long_window=3, weights=[1.0, -1.0, 0.0])
+
 
 
 def test_cross_sectional_rank_is_computed_by_date():
