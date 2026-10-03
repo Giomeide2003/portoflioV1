@@ -36,6 +36,8 @@ def multi_horizon_momentum(
         weights = [1.0, 1.0, 1.0]
     if len(weights) != 3:
         raise ValueError("three weights are required")
+    if sum(weights) == 0:
+        raise ValueError("weights cannot sum to zero")
 
     result = prices.copy()
     for window in windows:
@@ -104,6 +106,8 @@ def combine_factor_signals(
 
     if len(weights) != len(factors):
         raise ValueError("weights and factors must have the same length")
+    if sum(weights) == 0:
+        raise ValueError("weights cannot sum to zero")
 
     result = data.copy()
     standardized = [
@@ -114,9 +118,8 @@ def combine_factor_signals(
     result["composite_signal"] = sum(
         weight * factor
         for weight, factor in zip(weights, standardized)
-    )
+    ) / sum(weights)
     return result
-
 
 
 def rank_cross_sectional_signal(
