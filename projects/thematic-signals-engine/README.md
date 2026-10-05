@@ -52,6 +52,16 @@ L'exposition sectorielle permet d'agréger les positions ou les poids par secteu
 
 Le module est prévu pour comparer des métriques de valorisation entre titres d'un même univers, par exemple un ratio de valorisation normalisé par rapport à son secteur.
 
+## Analyse sectorielle
+
+Le module `src/portfolio/sector_exposure.py` complète la construction de portefeuille avec une analyse d'exposition sectorielle. Pour chaque date, il calcule :
+
+- le poids de chaque secteur dans les positions sélectionnées ;
+- le poids du secteur dominant ;
+- le **Herfindahl-Hirschman Index (HHI)** comme mesure simple de concentration.
+
+Les poids sont calculés en équipondération des titres sélectionnés. Cette convention est volontairement simple et sert à isoler l'effet de la sélection des titres avant d'introduire une optimisation de portefeuille plus avancée.
+
 ## Backtesting
 
 Le moteur applique les signaux avec un décalage temporel afin d'éviter d'utiliser une information future pour générer un rendement passé.
