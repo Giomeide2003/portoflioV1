@@ -62,6 +62,10 @@ Le module `src/portfolio/sector_exposure.py` complète la construction de portef
 
 Les poids sont calculés en équipondération des titres sélectionnés. Cette convention est volontairement simple et sert à isoler l'effet de la sélection des titres avant d'introduire une optimisation de portefeuille plus avancée.
 
+### Contrôle des limites sectorielles
+
+Le module `src/portfolio/sector_risk.py` compare le poids de chaque secteur à une limite configurable (35 % par défaut) et signale les dépassements par date. Il s'agit d'un diagnostic de risque, pas d'un mécanisme automatique de rebalancement. Les poids sont équipondérés et doivent être interprétés comme une hypothèse de recherche simplifiée.
+
 ## Backtesting
 
 Le moteur applique les signaux avec un décalage temporel afin d'éviter d'utiliser une information future pour générer un rendement passé.
