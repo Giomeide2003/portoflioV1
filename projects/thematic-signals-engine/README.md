@@ -78,6 +78,10 @@ Les métriques prévues sont :
 - maximum drawdown ;
 - persistance du signal.
 
+### Turnover et coûts de transaction
+
+Le module `src/backtest/trading_costs.py` calcule le turnover unidirectionnel à partir des variations de poids entre dates, puis estime les rendements nets en déduisant un coût paramétrable en points de base. Par exemple, avec 10 bps de coût et 50 % de turnover, le coût estimé est de 5 bps sur la période. Il s'agit d'un modèle simplifié : il n'intègre ni spread bid-ask, ni impact de marché, ni commissions spécifiques à un courtier.
+
 ## Données
 
 Aucune donnée propriétaire n'est incluse dans le dépôt. Les tests utilisent de petits jeux de données synthétiques afin de rendre le code reproductible.
