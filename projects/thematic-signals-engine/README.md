@@ -86,6 +86,10 @@ Le module `src/backtest/trading_costs.py` calcule le turnover unidirectionnel à
 
 Le backtest expose maintenant `compare_gross_net_performance`, qui applique les coûts de transaction au rendement brut à partir du turnover fourni et compare le rendement cumulé, le Sharpe ratio et le maximum drawdown avant/après coûts. Le différentiel de rendement cumulé est présenté comme un **coût de performance estimé**. Cette analyse reste indicative tant que le turnover n'est pas construit à partir des poids réellement exécutés et que les coûts ne sont pas calibrés sur le marché ciblé.
 
+### Évaluation walk-forward
+
+Le module `src/backtest/walk_forward.py` fournit des fenêtres chronologiques expanding-window : les dates d'entraînement précèdent strictement les dates de test, sans mélange aléatoire. Les tailles sont exprimées en dates uniques, pas en lignes. Cette brique prépare une évaluation hors échantillon ; elle ne calibre pas automatiquement les paramètres ni ne garantit à elle seule l'absence de biais. Les transformations et paramètres doivent être ajustés uniquement sur chaque fenêtre d'entraînement avant d'être appliqués à la fenêtre de test.
+
 ## Données
 
 Aucune donnée propriétaire n'est incluse dans le dépôt. Les tests utilisent de petits jeux de données synthétiques afin de rendre le code reproductible.
