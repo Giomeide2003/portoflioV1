@@ -35,7 +35,7 @@ thematic-signals-engine/
 └── tests/
     ├── test_market_data.py
     ├── test_signals.py
-    └── test_backtest.py
+    ├── test_backtest.py\n    └── test_walk_forward.py
 ```
 
 ## Signaux initiaux
@@ -88,7 +88,7 @@ Le backtest expose maintenant `compare_gross_net_performance`, qui applique les 
 
 ### Évaluation walk-forward
 
-Le module `src/backtest/walk_forward.py` fournit des fenêtres chronologiques expanding-window : les dates d'entraînement précèdent strictement les dates de test, sans mélange aléatoire. Les tailles sont exprimées en dates uniques, pas en lignes. Cette brique prépare une évaluation hors échantillon ; elle ne calibre pas automatiquement les paramètres ni ne garantit à elle seule l'absence de biais. Les transformations et paramètres doivent être ajustés uniquement sur chaque fenêtre d'entraînement avant d'être appliqués à la fenêtre de test.
+Le module `src/backtest/walk_forward.py` fournit des fenêtres chronologiques expanding-window : les dates d'entraînement précèdent strictement les dates de test, sans mélange aléatoire. Les tailles sont exprimées en dates uniques, pas en lignes. La fonction `run_walk_forward` appelle un évaluateur fourni par l'utilisateur pour chaque fenêtre et concatène les rendements de test hors échantillon. L'évaluateur doit calibrer les paramètres uniquement sur l'entraînement, puis retourner une série de rendements indexée par les dates du test. Le module vérifie que les dates retournées appartiennent bien à la fenêtre de test et refuse les fenêtres de test qui se chevauchent dans le résultat final. Cette brique ne calibre pas automatiquement les paramètres : la logique de calibration doit être implémentée dans l'évaluateur. Elle ne garantit pas à elle seule l'absence de biais.
 
 ## Données
 
