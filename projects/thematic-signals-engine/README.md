@@ -31,11 +31,15 @@ thematic-signals-engine/
 │   ├── signals/
 │   │   └── thematic_signals.py
 │   └── backtest/
-│       └── engine.py
+│       ├── engine.py
+│       ├── walk_forward.py
+│       └── momentum_walk_forward.py
 └── tests/
     ├── test_market_data.py
     ├── test_signals.py
-    ├── test_backtest.py\n    └── test_walk_forward.py
+    ├── test_backtest.py
+    ├── test_walk_forward.py
+    └── test_momentum_walk_forward.py
 ```
 
 ## Signaux initiaux
@@ -89,6 +93,13 @@ Le backtest expose maintenant `compare_gross_net_performance`, qui applique les 
 ### Évaluation walk-forward
 
 Le module `src/backtest/walk_forward.py` fournit des fenêtres chronologiques expanding-window : les dates d'entraînement précèdent strictement les dates de test, sans mélange aléatoire. Les tailles sont exprimées en dates uniques, pas en lignes. La fonction `run_walk_forward` appelle un évaluateur fourni par l'utilisateur pour chaque fenêtre et concatène les rendements de test hors échantillon. L'évaluateur doit calibrer les paramètres uniquement sur l'entraînement, puis retourner une série de rendements indexée par les dates du test. Le module vérifie que les dates retournées appartiennent bien à la fenêtre de test et refuse les fenêtres de test qui se chevauchent dans le résultat final. Cette brique ne calibre pas automatiquement les paramètres : la logique de calibration doit être implémentée dans l'évaluateur. Elle ne garantit pas à elle seule l'absence de biais.
+
+
+#### Calibration walk-forward du momentum
+
+Le module `src/backtest/momentum_walk_forward.py` relie maintenant la validation temporelle à une stratégie long-only simple : il compare plusieurs fenêtres de momentum sur la période d'entraînement selon le Sharpe ratio, retient la meilleure, puis calcule les rendements sur la période de test avec une sélection décalée d'une période. `run_momentum_walk_forward` répète ce processus sur les fenêtres successives et renvoie les rendements hors échantillon concaténés.
+
+Cette implémentation est un prototype pédagogique, pas une stratégie prête à être tradée. Le Sharpe d'entraînement peut être instable sur de petits échantillons ; il faut comparer à un benchmark, intégrer le turnover et les coûts de transaction dans la boucle de sélection, et tester sur des données de marché fiables. Les tests ont été ajoutés mais ne sont pas exécutés automatiquement par cette modification.
 
 ## Données
 
