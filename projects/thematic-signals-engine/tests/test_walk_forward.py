@@ -36,3 +36,42 @@ def test_apply_date_split_keeps_rows_in_correct_partition():
     assert len(train) == 4
     assert len(test) == 2
     assert train["date"].max() < test["date"].min()
+
+
+from src.backtest.walk_forward import run_walk_forward
+
+
+def test_run_walk_forward_concatenates_only_test_returns():
+    dates = pd.date_range("2025-01-01", periods=8, freq="D")
+    data = pd.DataFrame({"date": dates, "close": range(100, 108)})
+
+    def evaluator(train, test):
+        assert train["date"].max() < test["date"].min()
+        return pd.Series([0.01] * len(test), index=test["date"])
+
+    result = run_walk_forward(data, evaluator, train_size=4, test_size=2)
+    assert len(result) == 4
+    assert result.index.is_monotonic_increasing
+    assert (result == 0.01).all()
+
+
+def test_run_walk_forward_rejects_returns_outside_test_window():
+    dates = pd.date_range("2025-01-01", periods=6, freq="D")
+    data = pd.DataFrame({"date": dates})
+
+    def invalid_evaluator(train, test):
+        return pd.Series([0.01], index=[train["date"].iloc[0]])
+
+    with pytest.raises(ValueError, match="outside the test window"):
+        run_walk_forward(data, invalid_evaluator, train_size=4, test_size=2)
+
+
+def test_run_walk_forward_rejects_overlapping_test_windows():
+    dates = pd.date_range("2025-01-01", periods=8, freq="D")
+    data = pd.DataFrame({"date": dates})
+
+    def evaluator(train, test):
+        return pd.Series([0.01] * len(test), index=test["date"])
+
+    with pytest.raises(ValueError, match="test windows overlap"):
+        run_walk_forward(data, evaluator, train_size=4, test_size=3, step_size=2)
