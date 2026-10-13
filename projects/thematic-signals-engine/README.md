@@ -101,6 +101,12 @@ Le module `src/backtest/momentum_walk_forward.py` relie maintenant la validation
 
 Cette implémentation est un prototype pédagogique, pas une stratégie prête à être tradée. Le Sharpe d'entraînement peut être instable sur de petits échantillons ; il faut comparer à un benchmark, intégrer le turnover et les coûts de transaction dans la boucle de sélection, et tester sur des données de marché fiables. Les tests ont été ajoutés mais ne sont pas exécutés automatiquement par cette modification.
 
+## Intégration continue
+
+Le workflow GitHub Actions `.github/workflows/thematic-signals-engine-tests.yml` installe les dépendances du projet et exécute `pytest` avec Python 3.12 lors des push et pull requests qui touchent ce projet. Il peut aussi être lancé manuellement depuis l'onglet **Actions**.
+
+Le statut du workflow doit être vérifié dans GitHub Actions : l'ajout de cette configuration ne signifie pas, à lui seul, que la suite de tests a déjà réussi.
+
 ## Données
 
 Aucune donnée propriétaire n'est incluse dans le dépôt. Les tests utilisent de petits jeux de données synthétiques afin de rendre le code reproductible.
