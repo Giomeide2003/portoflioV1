@@ -17,7 +17,7 @@ from src.backtest.engine import (
     maximum_drawdown,
     sharpe_ratio,
 )
-from src.backtest.momentum_walk_forward import run_momentum_walk_forward
+from src.backtest.momentum_net_walk_forward import run_momentum_walk_forward_net
 
 
 def make_synthetic_prices(
@@ -48,29 +48,28 @@ def make_synthetic_prices(
 
 def main() -> None:
     prices = make_synthetic_prices()
-    oos_returns = run_momentum_walk_forward(
-        prices,
-        train_size=252,
-        test_size=63,
-        step_size=63,
-        lookbacks=(5, 10, 20),
-        n_positions=3,
-    ).dropna()
-
-    benchmark = benchmark_returns(prices).reindex(oos_returns.index).dropna()
-    aligned = oos_returns.reindex(benchmark.index).dropna()
+    report = run_momentum_walk_forward_net(
+        prices, train_size=252, test_size=63, step_size=63,
+        lookbacks=(5, 10, 20), n_positions=3, cost_bps=5.0,
+    )
+    benchmark = benchmark_returns(prices).reindex(report.index).dropna()
+    aligned = report.reindex(benchmark.index).dropna()
     benchmark = benchmark.reindex(aligned.index)
-    comparison = compare_to_benchmark(aligned, benchmark)
+    gross_comparison = compare_to_benchmark(aligned["gross_return"], benchmark)
+    net_comparison = compare_to_benchmark(aligned["net_return"], benchmark)
 
     print("Synthetic walk-forward momentum research")
     print(f"Out-of-sample periods: {len(aligned)}")
-    print(f"Gross cumulative return: {cumulative_return(aligned):.2%}")
-    print(f"Annualized volatility: {annualized_volatility(aligned):.2%}")
-    print(f"Sharpe ratio (zero risk-free rate): {sharpe_ratio(aligned):.3f}")
-    print(f"Maximum drawdown: {maximum_drawdown(aligned):.2%}")
-    print(f"Equal-weight universe benchmark: {comparison['benchmark_return']:.2%}")
-    print(f"Excess cumulative return: {comparison['excess_return']:.2%}")
-    print("Costs excluded; all input prices are synthetic.")
+    print(f"Average one-way turnover: {aligned['turnover'].mean():.2%}")
+    print(f"Gross cumulative return: {cumulative_return(aligned['gross_return']):.2%}")
+    print(f"Net cumulative return (5 bps): {cumulative_return(aligned['net_return']):.2%}")
+    print(f"Net annualized volatility: {annualized_volatility(aligned['net_return']):.2%}")
+    print(f"Net Sharpe ratio (zero risk-free rate): {sharpe_ratio(aligned['net_return']):.3f}")
+    print(f"Net maximum drawdown: {maximum_drawdown(aligned['net_return']):.2%}")
+    print(f"Equal-weight universe benchmark: {gross_comparison['benchmark_return']:.2%}")
+    print(f"Gross excess cumulative return: {gross_comparison['excess_return']:.2%}")
+    print(f"Net excess cumulative return: {net_comparison['excess_return']:.2%}")
+    print("Synthetic prices; costs are simplified assumptions, not market-calibrated.")
 
 
 if __name__ == "__main__":
