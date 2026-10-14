@@ -101,6 +101,16 @@ Le module `src/backtest/momentum_walk_forward.py` relie maintenant la validation
 
 Cette implémentation est un prototype pédagogique, pas une stratégie prête à être tradée. Le Sharpe d'entraînement peut être instable sur de petits échantillons ; il faut comparer à un benchmark, intégrer le turnover et les coûts de transaction dans la boucle de sélection, et tester sur des données de marché fiables. Les tests ont été ajoutés mais ne sont pas exécutés automatiquement par cette modification.
 
+## Exemple reproductible
+
+Un exemple de bout en bout génère des prix synthétiques déterministes, calibre une fenêtre de momentum sur des périodes d'entraînement successives, calcule les rendements hors échantillon et les compare à un benchmark équipondéré de l'univers :
+
+```bash
+python -m examples.run_synthetic_walk_forward
+```
+
+Le script affiche le rendement cumulé hors échantillon, la volatilité annualisée, le Sharpe ratio (taux sans risque nul), le maximum drawdown et la performance excédentaire face au benchmark. Il n'utilise aucune donnée de marché réelle et **n'intègre pas les coûts de transaction** : ses chiffres servent à vérifier le parcours de recherche, pas à revendiquer une performance exploitable.
+
 ## Intégration continue
 
 Le workflow GitHub Actions `.github/workflows/thematic-signals-engine-tests.yml` installe les dépendances du projet et exécute `pytest` avec Python 3.12 lors des push et pull requests qui touchent ce projet. Il peut aussi être lancé manuellement depuis l'onglet **Actions**.
