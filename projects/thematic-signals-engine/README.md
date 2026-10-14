@@ -103,13 +103,15 @@ Cette implémentation est un prototype pédagogique, pas une stratégie prête �
 
 ## Exemple reproductible
 
-Un exemple de bout en bout génère des prix synthétiques déterministes, calibre une fenêtre de momentum sur des périodes d'entraînement successives, calcule les rendements hors échantillon et les compare à un benchmark équipondéré de l'univers :
+Un exemple de bout en bout génère des prix synthétiques déterministes, calibre une fenêtre de momentum sur des périodes d'entraînement successives, calcule le turnover à partir des poids équipondérés effectivement sélectionnés, estime les rendements nets après coûts, puis compare les résultats hors échantillon à un benchmark équipondéré de l'univers :
 
 ```bash
 python -m examples.run_synthetic_walk_forward
 ```
 
-Le script affiche le rendement cumulé hors échantillon, la volatilité annualisée, le Sharpe ratio (taux sans risque nul), le maximum drawdown et la performance excédentaire face au benchmark. Il n'utilise aucune donnée de marché réelle et **n'intègre pas les coûts de transaction** : ses chiffres servent à vérifier le parcours de recherche, pas à revendiquer une performance exploitable.
+Le script affiche le turnover moyen, les rendements cumulés brut et net, la volatilité annualisée nette, le Sharpe ratio net (taux sans risque nul), le maximum drawdown net et la performance excédentaire brute/nette face au benchmark. Le coût par défaut est de 5 points de base par unité de turnover unidirectionnel. Le modèle reste simplifié : il exclut spread, impact de marché, fiscalité et frais propres au courtier. Les données sont synthétiques ; les chiffres servent à vérifier le parcours de recherche, pas à revendiquer une performance exploitable.
+
+Le module `src/backtest/momentum_net_walk_forward.py` expose `run_momentum_walk_forward_net`, qui retourne les rendements bruts, le turnover, les rendements nets et la fenêtre retenue pour chaque date hors échantillon. Le turnover est calculé sur les poids des positions décalées, avec entrées et sorties incluses. Les coûts sont déduits sur la période de rendement correspondante. La calibration de fenêtre demeure basée sur le Sharpe brut d'entraînement ; les coûts ne sont donc pas optimisés dans la sélection du paramètre.
 
 ## Intégration continue
 
